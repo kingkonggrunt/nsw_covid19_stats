@@ -5,6 +5,6 @@ A web scraper that scrapes the [NSW COVID 19 Stats Page](https://www.health.nsw.
 The intention is to output the data via a FastAPI
 
 #### Next Steps
-- Turn Scraper into a FastAP
+- Turn Scraper into a FastAPI
 
 *Author:* *Duc Cong Duong*
