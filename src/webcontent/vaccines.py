@@ -4,6 +4,8 @@ from ..saucier.utensils import *  #i know what i'm doing there
 
 class VaccineDosesPercent():  # TODO: documentation
     _attr = {"class": "vax-update moh-rteTable-6"}
+    _table_index = 0
+
     _attr_row = {
         "first" : {"class": "moh-rteTableOddRow-6"},
         "second" : {"class": "moh-rteTableEvenRow-6"},
@@ -24,7 +26,6 @@ class VaccineDosesPercent():  # TODO: documentation
         "12_to_15" : 1,
         "5_to_11" : 1
     }
-    _table_index = 0
 
     def __init__(self, Soup: Soup):
         self.soup = Soup
