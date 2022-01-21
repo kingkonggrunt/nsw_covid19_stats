@@ -170,5 +170,156 @@ class VaccineDosesPercent():  # TODO: documentation
         self._third_12_to_15 = item.text
 
 
-#
-# class VaccineDoses()
+class VaccineDoses():  # TODO: documentation
+    _attr = {"class": "vax-update moh-rteTable-6"}
+    _table_index = 1
+    _table_index_other = 2
+
+    _attr_row = {
+        "first": {"class": "moh-rteTableOddRow-6"},
+        "second": {"class": "moh-rteTableEvenRow-6"},
+        "third": {"class": "moh-rteTableOddRow-6"},
+        "total": {"class": "moh-rteTableFooterRow-6"}
+    }
+    _attr_cols = {
+        "day": {"class": "moh-rteTableOddCol-6"},
+        "total": {"class": "moh-rteTableEvenCol-6"},
+        "total_day": {"class": "moh-rteTableFooterOddCol-6"},
+        "total_total": {"class": "moh-rteTableFooterEvenCol-6"},
+    }
+    _index_rows = {
+        "first": 0,
+        "second": 0,
+        "third": 1,
+        "total": None
+    }
+    _index_cols = {
+        "day": 0,
+        "total": 1,
+        "total_day": 0,
+        "total_total": 1,
+    }
+
+    def __init__(self, Soup: Soup):
+        self.soup = Soup
+        self._tag = self.soup.find_all(attrs=self._attr)[self._table_index]
+        self._tag_other = self.soup.find_all(attrs=self._attr)[self._table_index_other]
+
+        self.first_day = self._tag
+        self.second_day = self._tag
+        self.third_day = self._tag
+        self.total_day = self._tag
+
+        self.first_total = self._tag
+        self.second_total = self._tag
+        self.third_total = self._tag
+        self.total_total = self._tag
+
+        self.total_total_other = self._tag_other
+        self.total_doses = self._tag_other
+
+    @property
+    def first_day(self):
+        return self._first_day
+
+    @first_day.setter
+    def first_day(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["first"], self._attr_cols["day"],
+            self._index_rows["first"], self._index_cols["day"])
+        self._first_day = int(item.text.replace(",", ''))
+
+    @property
+    def second_day(self):
+        return self._second_day
+
+    @second_day.setter
+    def second_day(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["second"], self._attr_cols["day"],
+            self._index_rows["second"], self._index_cols["day"])
+        self._second_day = int(item.text.replace(",", ''))
+
+    @property
+    def third_day(self):
+        return self._third_day
+
+    @third_day.setter
+    def third_day(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["third"], self._attr_cols["day"],
+            self._index_rows["third"], self._index_cols["day"])
+        self._third_day = int(item.text.replace(",", ''))
+
+    @property
+    def total_day(self):
+        return self._total_day
+
+    @total_day.setter
+    def total_day(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["total"], self._attr_cols["total_day"],
+            self._index_rows["total"], self._index_cols["total_day"])
+        self._total_day = int(item.text.replace(",", ''))
+
+    @property
+    def first_total(self):
+        return self._first_total
+
+    @first_total.setter
+    def first_total(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["first"], self._attr_cols["total"],
+            self._index_rows["first"], self._index_cols["total"])
+        self._first_total = int(item.text.replace(",", ''))
+
+    @property
+    def second_total(self):
+        return self._second_total
+
+    @second_total.setter
+    def second_total(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["second"], self._attr_cols["total"],
+            self._index_rows["second"], self._index_cols["total"])
+        self._second_total = int(item.text.replace(",", ''))
+
+    @property
+    def third_total(self):
+        return self._third_total
+
+    @third_total.setter
+    def third_total(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["third"], self._attr_cols["total"],
+            self._index_rows["third"], self._index_cols["total"])
+        self._third_total = int(item.text.replace(",", ''))
+
+    @property
+    def total_total(self):
+        return self._total_total
+
+    @total_total.setter
+    def total_total(self, tag):
+
+        item = grab_table_item(tag, self._attr_row["total"], self._attr_cols["total_total"],
+            self._index_rows["total"], self._index_cols["total_total"])
+        self._total_total = int(item.text.replace(",", ''))
+
+    @property
+    def total_total_other(self):
+        return self._total_total_other  # TODO: ? is a better variable name better?
+
+    @total_total_other.setter
+    def total_total_other(self, tag):
+        item = grab_table_item(tag, {"class": "moh-rteTableEvenRow-6"}, {"class": "moh-rteTableOddCol-6"})
+        self._total_total_other = int(item.text.replace(",", ''))
+
+    @property
+    def total_doses(self):
+        return self._total_doses
+
+    @total_doses.setter
+    def total_doses(self, tag):
+        item = grab_table_item(tag, {"class": "moh-rteTableFooterRow-6"}, {"class": "moh-rteTableFooterOddCol-6"})
+        self._total_doses = int(item.text.replace(",", ''))
