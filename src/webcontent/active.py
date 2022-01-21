@@ -12,7 +12,7 @@ def return_li_item_with_text_search(tag, text):
 
     Returns
     -------
-    Tag
+    item: Tag
         <li> item
 
     """
@@ -59,8 +59,7 @@ class ActivateCases():
         self.icu = self._tag
         self.ventilation = self._tag
 
-    """
-    Property: ventilation
+    """Property: ventilation
         no. of active cases on ventilation
     """
     @property
@@ -72,8 +71,7 @@ class ActivateCases():
         item = return_li_item_with_text_search(tag, "Active cases")
         self._active = int(item.text.replace("Active cases", '').replace(",", ''))
 
-    """
-    Property: hospital
+    """Property: hospital
         no. of active covid hospitalisations
     """
     @property
@@ -85,8 +83,7 @@ class ActivateCases():
         item = return_li_item_with_text_search(tag, "Admitted to hospital")
         self._hospital = int(item.text.replace("Admitted to hospital", '').replace(",", ''))
 
-    """
-    Property: icu
+    """Property: icu
         no. of active icu cases
     """
     @property
@@ -98,8 +95,7 @@ class ActivateCases():
         item = return_li_item_with_text_search(tag, "In intensive care")
         self._icu = int(item.text.replace("In intensive care", '').replace(",", ''))
 
-    """
-    Property: ventilation
+    """Property: ventilation
         no. of active cases on ventilation
     """
     @property
