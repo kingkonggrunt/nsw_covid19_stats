@@ -1,24 +1,5 @@
 from ..saucier.soup import Soup
-
-def return_li_item_with_text_search(tag, text):
-    """Finds a single <li> item based on text content
-
-    Parameters
-    ----------
-    tag : Tag
-        an iteratable parent element: <ol>, <ul>, or <menu>
-    text : str
-        search text
-
-    Returns
-    -------
-    item: Tag
-        <li> item
-
-    """
-    for item in tag.find_all("li"):
-        if text in item.text:
-            return item
+from ..saucier.utensils import *  #i know what i'm doing here
 
 
 class ActivateCases():
