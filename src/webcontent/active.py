@@ -22,6 +22,8 @@ def return_li_item_with_text_search(tag, text):
 
 
 class ActivateCases():
+    _attr = {"class": "active-cases calloutbox"}
+
     def __init__(self, Soup: Soup):
         """Active Covid Cases in NSW
 
@@ -50,7 +52,6 @@ class ActivateCases():
 
         """
         self.soup = Soup
-        self._attr = {"class": "active-cases calloutbox"}
         self._tag = self.soup.find(attrs=self._attr)
 
         self.active = self._tag
