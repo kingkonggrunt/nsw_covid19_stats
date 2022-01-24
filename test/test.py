@@ -49,3 +49,31 @@ class TestActivateCases(unittest.TestCase):
     def test_ventilation_less_than_icu(self):
         active_cases = ActivateCases(self.soup)
         self.assertLess(active_cases.ventilation, active_cases.icu)
+
+
+class TestReportedCases(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._url = "https://www.health.nsw.gov.au/Infectious/covid-19/Pages/stats-nsw.aspx"
+        cls.soup = Soup.from_url(cls._url, 'lxml')
+
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
+    def test_cases_are_integers(self):
+        reported = ReportedCases(self.soup)
+        self.assertIsInstance(reported.day, int)
+        self.assertIsInstance(reported.week, int)
+        self.assertIsInstance(reported.lastweek, int)
+        self.assertIsInstance(reported.total, int)
+
+    def test_day_less_than_week(self):
+        reported = ReportedCases(self.soup)
+        self.assertLess(reported.day, reported.week)
+
+    def test_day_week_last_week_less_than_total(self):
+        reported = ReportedCases(self.soup)
+        self.assertLess(reported.day, reported.total)
+        self.assertLess(reported.week, reported.total)
+        self.assertLess(reported.lastweek, reported.total)
