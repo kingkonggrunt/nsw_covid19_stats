@@ -22,4 +22,9 @@ class Soup(BeautifulSoup):
 
         """
         url_data = requests.get(url)
+        cls._url = url
+        cls._features = features
         return cls(url_data.content, features)
+
+    def __repr__(self):
+        return f"Soup({self._url}, {self._features})"
