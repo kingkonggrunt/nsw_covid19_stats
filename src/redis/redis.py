@@ -1,7 +1,7 @@
 import redis
 
 
-class RedisDictionary():
+class RedisDictionary():  # TODO: documentation
     def __init__(self, r: redis.Redis, db):
         self.db = db
         self.r = r(db=self.db)

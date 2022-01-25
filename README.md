@@ -6,5 +6,8 @@ The intention is to output the data via a FastAPI
 
 #### Next Steps
 - Turn Scraper into a FastAPI
+- Have FastAPI access Redis for values
+- Have an updater that scrapes values and updates API in redis
+- Deployment using poetry (?)
 
 *Author:* *Duc Cong Duong*
