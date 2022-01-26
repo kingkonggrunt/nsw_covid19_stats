@@ -7,11 +7,11 @@ from src.redis.redis import RedisDictionary
 
 app = FastAPI()
 r = RedisDictionary(redis.Redis, db=2)
-#
+
+
 @app.get("/")
 def root():
     return {"message": "Hello World"}
-# @app.get("/home")
 
 
 """Active Cases
@@ -80,7 +80,6 @@ Routes
 /reported/total
     returns the total reported no. of cases
 """
-
 @app.get("/reported")
 def reported():
     return {
@@ -107,15 +106,93 @@ def reported_total():
     return {"amount": r["reported_total"]}
 
 
-#
-# @app.get("/active/active")
-# active_cases_active
-#
-# @app.get("/active/hospital")
-# active_cases_hospital
-#
-# @app.get("/active/icu")
-# active_cases_icu
-#
-# @app.get("/active/hospital")
-# active_cases_ventilation
+"""Vaccines
+
+Routes
+------
+
+
+"""
+@app.get("/vaccines")
+def vaccines():
+    return {
+        "doses": {
+            "daily": {
+                "first": r["daily_nsw_first"],
+                "second": r["daily_nsw_second"],
+                "third": r["daily_nsw_third"],
+                "total": r["daily_nsw_total"],
+            },
+            "all": {
+                "first": r["total_nsw_first"],
+                "second": r["total_nsw_second"],
+                "third": r["total_nsw_third"],
+                "all": r["total_nsw_total"],
+                "nsw": r["total_nsw"],
+                "other": r["total_other"],
+                "total": r["total"],
+            }
+        },
+        "population": {
+            "16_above": {
+                "first": r["first_16_above"],
+                "second": r["second_16_above"],
+                "third": r["third_16_above"],
+            },
+            "12_to_15": {
+                "first": r["first_12_to_15"],
+                "second": r["second_12_to_15"],
+                "third": r["third_12_to_15"],
+            },
+            "5_to_11": {
+                "first": r["first_5_to_11"],
+                "second": r["second_5_to_11"],
+                "third": r["third_5_to_11"],
+            },
+        }
+
+    }
+
+@app.get("/vaccines/population")
+def vaccines_population():
+    return {
+        "population": {
+            "16_above": {
+                "first": r["first_16_above"],
+                "second": r["second_16_above"],
+                "third": r["third_16_above"],
+            },
+            "12_to_15": {
+                "first": r["first_12_to_15"],
+                "second": r["second_12_to_15"],
+                "third": r["third_12_to_15"],
+            },
+            "5_to_11": {
+                "first": r["first_5_to_11"],
+                "second": r["second_5_to_11"],
+                "third": r["third_5_to_11"],
+            },
+        }
+    }
+
+@app.get("/vaccines/doses")
+def vaccines_doses():
+    return {
+        "doses": {
+            "daily": {
+                "first": r["daily_nsw_first"],
+                "second": r["daily_nsw_second"],
+                "third": r["daily_nsw_third"],
+                "total": r["daily_nsw_total"],
+            },
+            "all": {
+                "first": r["total_nsw_first"],
+                "second": r["total_nsw_second"],
+                "third": r["total_nsw_third"],
+                "all": r["total_nsw_total"],
+                "nsw": r["total_nsw"],
+                "other": r["total_other"],
+                "total": r["total"],
+            }
+        }
+    }
