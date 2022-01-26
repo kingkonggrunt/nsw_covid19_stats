@@ -57,11 +57,11 @@ def reported_day():
 def reported_week():
     return {"amount": r["reported_week"]}
 
-@app.get("/reported/reported_lastweek")
+@app.get("/reported/lastweek")
 def reported_lastweek():
     return {"amount": r["reported_lastweek"]}
 
-@app.get("/reported/reported_total")
+@app.get("/reported/total")
 def reported_total():
     return {"amount": r["reported_total"]}
 
