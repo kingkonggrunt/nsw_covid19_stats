@@ -13,6 +13,27 @@ def root():
     return {"message": "Hello World"}
 # @app.get("/home")
 
+
+"""Active Cases
+
+Routes
+------
+/active
+    returns the active no. of `active`, `hospital`, `icu` and `ventilation`
+    cases
+/active/cases
+    returns the active no. of cases
+
+/active/hospital
+    returns the active no. of hospital cases
+
+/active/icu
+    returns the active no. of icu cases
+
+/active/ventilation
+    returns the active no. of ventilation cases
+
+"""
 @app.get("/active")
 def active():
     return {
@@ -39,6 +60,26 @@ def active_ventilation():
     return {"amount": r["ventilation"]}
 
 
+"""Reported Cases
+
+Routes
+------
+/reported
+    returns the reported no. of cases for the last `day`, `week`, `lastweek`,
+    and `total` cases
+
+/reported/day
+    returns the reported no. of cases for the past 24 hours (day)
+
+/reported/week
+    returns the reported no. of cases for the past 7 days
+
+/reported/lastweek
+    returns the reported no. of cases for the past 8-14 days
+
+/reported/total
+    returns the total reported no. of cases
+"""
 
 @app.get("/reported")
 def reported():
