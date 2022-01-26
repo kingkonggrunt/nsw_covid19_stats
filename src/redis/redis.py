@@ -14,3 +14,6 @@ class RedisDictionary():  # TODO: documentation
 
     def __repr__(self):
         return f"RedisDictionary(redis.Redis, db={self.db})"
+
+    def multi_set(self, dict):
+        self.r.mset(dict)
