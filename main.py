@@ -1,5 +1,8 @@
 from src.webcontent.active import ActivateCases
 from src.saucier.soup import Soup
+from src.redis.redis import RedisDictionary
+
+import redis
 
 
 
@@ -13,6 +16,16 @@ def main():
     print(active_cases.icu)
     print(active_cases.ventilation)
 
+
+
+    rdict = RedisDictionary(redis.Redis, db=2)
+    print(repr(rdict))
+    # rdict["active"] = active_cases.active
+    # rdict["hospital"] = active_cases.hospital
+    # rdict["icu"] = active_cases.icu
+    # rdict["ventilation"] = active_cases.ventilation
+    #
+    # print(rdict["ventilation"])
 
     return
 
