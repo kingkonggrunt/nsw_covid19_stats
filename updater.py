@@ -9,6 +9,7 @@ rdict = RedisDictionary(redis.Redis, db=2)
 
 def main():
     while True:
+        print(time.localtime())
         url = "https://www.health.nsw.gov.au/Infectious/covid-19/Pages/stats-nsw.aspx"
         soup = Soup.from_url(url, 'lxml')
         updater = RedisUpdater(rdict, soup)
