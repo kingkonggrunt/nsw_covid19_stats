@@ -1,3 +1,12 @@
+"""api.py
+    Main file to run the api
+
+If using your own redis configuration, consider that the current db value `2`,
+may need to be modified. RedisDictionary only allows changing of the db connection number.
+TODO: **kwargs for redisdictionary
+
+"""
+
 from fastapi import FastAPI
 
 import redis
@@ -20,6 +29,7 @@ Routes
 /active
     returns the active no. of `active`, `hospital`, `icu` and `ventilation`
     cases
+
 /active/cases
     returns the active no. of cases
 
@@ -109,8 +119,14 @@ def reported_total():
 
 Routes
 ------
+/vaccines
+    return both the vaccine doses and vaccine population distrubition stats
 
+/vaccines/population
+    return the vaccine population distrubition stats
 
+/vaccines/doses
+    return the vaccine doses stats
 """
 @app.get("/vaccines")
 def vaccines():

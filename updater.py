@@ -1,3 +1,8 @@
+"""updater.py
+    Run this to run the updater for the api
+
+"""
+
 import time
 import redis
 from src.redis.redis import RedisDictionary
@@ -14,7 +19,7 @@ def main():
         soup = Soup.from_url(url, 'lxml')
         updater = RedisUpdater(rdict, soup)
         updater.update()
-        time.sleep(3*60*60)
+        time.sleep(3*60*60)  # every 3 hours. TODO: fancy updater
 
 
 if __name__ == '__main__':

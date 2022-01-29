@@ -1,15 +1,35 @@
+"""updater.py
+    file containing the updater class for the API
+
+"""
 import redis
 from ..redis.redis import RedisDictionary
 from ..saucier.soup import Soup
 from ..webcontent import active, reported, vaccines
 
 
-class RedisUpdater():
+class RedisUpdater():  #TODO: ? better name (too misleading)
+    """Updater for the API's Redis Database
+
+    Parameters
+    ----------
+    rdict : RedisDictionary
+        An instance of a RedisDictionary
+    soup : Soup
+        An instance of a Soup class
+
+    Attributes
+    ----------
+    rdict
+    soup
+
+    """
     def __init__(self, rdict: RedisDictionary, soup: Soup):
         self.rdict = rdict
         self.soup = soup
 
     def _update_active(self):
+        """Updates the active stats"""
         _active = active.ActivateCases(self.soup)
 
         self.rdict.multi_set({
@@ -20,6 +40,7 @@ class RedisUpdater():
         })
 
     def _update_reported(self):
+        """Updates the reported stats"""
         _reported = reported.ReportedCases(self.soup)
 
         self.rdict.multi_set({
@@ -30,6 +51,7 @@ class RedisUpdater():
         })
 
     def _update_vaccines(self):
+        """Updates the Vaccine stats"""
         _vaccines = vaccines.VaccineDoses(self.soup)
         _vaccines_percent = vaccines.VaccineDosesPercent(self.soup)
 
@@ -57,6 +79,7 @@ class RedisUpdater():
         })
 
     def update(self):
+        """Updates the redis db"""
         self._update_active()
         self._update_reported()
         self._update_vaccines()

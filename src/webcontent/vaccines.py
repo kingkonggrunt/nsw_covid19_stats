@@ -1,3 +1,6 @@
+"""vaccines.py
+    contains the VaccineDoses and VaccineDosesPercent classes
+"""
 from ..saucier.soup import Soup
 from ..saucier.utensils import *  #i know what i'm doing there
 
@@ -28,6 +31,34 @@ class VaccineDosesPercent():  # TODO: documentation
     }
 
     def __init__(self, Soup: Soup):
+        """VaccineDosesPercent
+            Vaccine Doses Population Numbers
+
+        Parameters
+        ----------
+        Soup : Soup
+            A Soup Class instantiated with the `from_url` class
+
+        Attributes
+        -------
+        self._attr, _attr_row, _attr_col, _index_rows, _index_cols : dict
+            dictionaries used to locate the relavent html element
+        self._tag
+            the "vax-update calloutbox" tag
+
+        Properties
+        ----------
+        first_16_above
+        first_5_to_11
+        first_12_to_15
+        second_16_above
+        second_5_to_11
+        second_12_to_15
+        third_16_above
+        third_5_to_11
+        third_12_to_15
+
+        """
         self.soup = Soup
         self._tag = self.soup.find_all(attrs=self._attr)[self._table_index]
 
@@ -201,6 +232,35 @@ class VaccineDoses():  # TODO: documentation
     }
 
     def __init__(self, Soup: Soup):
+        """VaccineDoses
+            Vaccine Doses Numbers
+
+        Parameters
+        ----------
+        Soup : Soup
+            A Soup Class instantiated with the `from_url` class
+
+        Attributes
+        -------
+        self._attr, _attr_row, _attr_col, _index_rows, _index_cols : dict
+            dictionaries used to locate the relavent html element
+        self._tag
+            the "vax-update calloutbox" tag
+
+        Properties
+        ----------
+        first_day
+        second_day
+        third_day
+        total_day
+        first_total
+        second_total
+        third_total
+        total_total
+        total_total_other
+        total_doses
+
+        """
         self.soup = Soup
         self._tag = self.soup.find_all(attrs=self._attr)[self._table_index]
         self._tag_other = self.soup.find_all(attrs=self._attr)[self._table_index_other]
@@ -218,6 +278,9 @@ class VaccineDoses():  # TODO: documentation
         self.total_total_other = self._tag_other
         self.total_doses = self._tag_other
 
+    """Property: first_day
+        no. of first doses in the past 24 hours
+    """
     @property
     def first_day(self):
         return self._first_day
@@ -229,6 +292,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["first"], self._index_cols["day"])
         self._first_day = int(item.text.replace(",", ''))
 
+    """Property: second_day
+        no. of second doses in the past 24 hours
+    """
     @property
     def second_day(self):
         return self._second_day
@@ -240,6 +306,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["second"], self._index_cols["day"])
         self._second_day = int(item.text.replace(",", ''))
 
+    """Property: third_day
+        no. of third doses in the past 24 hours
+    """
     @property
     def third_day(self):
         return self._third_day
@@ -251,6 +320,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["third"], self._index_cols["day"])
         self._third_day = int(item.text.replace(",", ''))
 
+    """Property: third_12_to_15
+        no. of third doses given to people between 12 and 15
+    """
     @property
     def total_day(self):
         return self._total_day
@@ -262,6 +334,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["total"], self._index_cols["total_day"])
         self._total_day = int(item.text.replace(",", ''))
 
+    """Property: first_total
+        no. of first doses in total
+    """
     @property
     def first_total(self):
         return self._first_total
@@ -273,6 +348,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["first"], self._index_cols["total"])
         self._first_total = int(item.text.replace(",", ''))
 
+    """Property: second_total
+        no. of second doses in total
+    """
     @property
     def second_total(self):
         return self._second_total
@@ -284,6 +362,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["second"], self._index_cols["total"])
         self._second_total = int(item.text.replace(",", ''))
 
+    """Property: third_total
+        no. of third doses in total
+    """
     @property
     def third_total(self):
         return self._third_total
@@ -295,6 +376,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["third"], self._index_cols["total"])
         self._third_total = int(item.text.replace(",", ''))
 
+    """Property: total_total
+        no. of all doses given in total in the NSW Health Covid Vaccination network
+    """
     @property
     def total_total(self):
         return self._total_total
@@ -306,6 +390,9 @@ class VaccineDoses():  # TODO: documentation
             self._index_rows["total"], self._index_cols["total_total"])
         self._total_total = int(item.text.replace(",", ''))
 
+    """Property: total_total_other
+        no. of all doses given in total outside of the NSW Health Covid Vaccination network
+    """
     @property
     def total_total_other(self):
         return self._total_total_other  # TODO: ? is a better variable name better?
@@ -315,6 +402,9 @@ class VaccineDoses():  # TODO: documentation
         item = grab_table_item(tag, {"class": "moh-rteTableEvenRow-6"}, {"class": "moh-rteTableOddCol-6"})
         self._total_total_other = int(item.text.replace(",", ''))
 
+    """Property: total_doses
+        no. of all doses given in NSW
+    """
     @property
     def total_doses(self):
         return self._total_doses
