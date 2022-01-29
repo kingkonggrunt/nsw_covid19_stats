@@ -5,7 +5,7 @@ from ..saucier.soup import Soup
 from ..saucier.utensils import *  #i know what i'm doing there
 
 
-class VaccineDosesPercent():  # TODO: documentation
+class VaccineDosesPercent():
     _attr = {"class": "vax-update moh-rteTable-6"}
     _table_index = 0
 
@@ -201,7 +201,7 @@ class VaccineDosesPercent():  # TODO: documentation
         self._third_12_to_15 = item.text
 
 
-class VaccineDoses():  # TODO: documentation
+class VaccineDoses():
     _attr = {"class": "vax-update moh-rteTable-6"}
     _table_index = 1
     _table_index_other = 2
