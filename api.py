@@ -21,7 +21,7 @@ r = RedisDictionary(redis.Redis, db=2)
 class NGINXConfig():
     """Custom Class for configuring the api for NGINX deployment"""
     uri = "/covid-stats"  # base uri where api with deployed example.com/<uri>
-    ## prefix parameter in include router doesn't work
+    ## prefix parameter in include router doesn't worka
 
 @app.get(f"{NGINXConfig.uri}/")
 def root():
