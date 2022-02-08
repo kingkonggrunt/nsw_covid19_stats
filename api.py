@@ -8,14 +8,12 @@ TODO: **kwargs for redisdictionary
 """
 
 from fastapi import FastAPI
-from fastapi.routing import APIRouter
 
 import redis
 from src.redis.redis import RedisDictionary
 
-router = APIRouter()
+
 app = FastAPI()
-app.include_router(router, prefix="/covid-stats")
 r = RedisDictionary(redis.Redis, db=2)
 
 
