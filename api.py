@@ -15,7 +15,7 @@ from src.redis.redis import RedisDictionary
 
 router = APIRouter()
 app = FastAPI()
-app.include_router(router, prefix="/covid-stats/covid-stats")
+app.include_router(router, prefix="/covid-stats/covid-stats/")
 r = RedisDictionary(redis.Redis, db=2)
 
 
