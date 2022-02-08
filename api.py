@@ -8,18 +8,22 @@ TODO: **kwargs for redisdictionary
 """
 
 from fastapi import FastAPI
-from fastapi.routing import APIRouter
 
 import redis
 from src.redis.redis import RedisDictionary
 
-router = APIRouter()
+
 app = FastAPI()
-app.include_router(router, prefix="/covid-stats/covid-stats")
 r = RedisDictionary(redis.Redis, db=2)
 
 
-@app.get("/")
+
+class NGINXConfig():
+    """Custom Class for configuring the api for NGINX deployment"""
+    uri = "/covid-stats"  # base uri where api with deployed example.com/<uri>
+    ## prefix parameter in include router doesn't work
+
+@app.get(f"{NGINXConfig.uri}/")
 def root():
     return {"message": "Hello World"}
 
@@ -45,7 +49,7 @@ Routes
     returns the active no. of ventilation cases
 
 """
-@app.get("/active")
+@app.get(f"{NGINXConfig.uri}/active")
 def active():
     return {
         "active": r["active"],
@@ -54,19 +58,19 @@ def active():
         "ventilation": r["ventilation"],
     }
 
-@app.get("/active/cases")
+@app.get(f"{NGINXConfig.uri}/active/cases")
 def active_cases():
     return {"amount": r["active"]}
 
-@app.get("/active/hospital")
+@app.get(f"{NGINXConfig.uri}/active/hospital")
 def active_hospital():
     return {"amount": r["hospital"]}
 
-@app.get("/active/icu")
+@app.get(f"{NGINXConfig.uri}/active/icu")
 def active_icu():
     return {"amount": r["icu"]}
 
-@app.get("/active/ventilation")
+@app.get(f"{NGINXConfig.uri}/active/ventilation")
 def active_ventilation():
     return {"amount": r["ventilation"]}
 
@@ -91,7 +95,7 @@ Routes
 /reported/total
     returns the total reported no. of cases
 """
-@app.get("/reported")
+@app.get(f"{NGINXConfig.uri}/reported")
 def reported():
     return {
         "day": r["reported_day"],
@@ -100,19 +104,19 @@ def reported():
         "total": r["reported_total"],
     }
 
-@app.get("/reported/day")
+@app.get(f"{NGINXConfig.uri}/reported/day")
 def reported_day():
     return {"amount": r["reported_day"]}
 
-@app.get("/reported/week")
+@app.get(f"{NGINXConfig.uri}/reported/week")
 def reported_week():
     return {"amount": r["reported_week"]}
 
-@app.get("/reported/lastweek")
+@app.get(f"{NGINXConfig.uri}/reported/lastweek")
 def reported_lastweek():
     return {"amount": r["reported_lastweek"]}
 
-@app.get("/reported/total")
+@app.get(f"{NGINXConfig.uri}/reported/total")
 def reported_total():
     return {"amount": r["reported_total"]}
 
@@ -130,7 +134,7 @@ Routes
 /vaccines/doses
     return the vaccine doses stats
 """
-@app.get("/vaccines")
+@app.get(f"{NGINXConfig.uri}/vaccines")
 def vaccines():
     return {
         "doses": {
@@ -170,7 +174,7 @@ def vaccines():
 
     }
 
-@app.get("/vaccines/population")
+@app.get(f"{NGINXConfig.uri}/vaccines/population")
 def vaccines_population():
     return {
         "population": {
@@ -192,7 +196,7 @@ def vaccines_population():
         }
     }
 
-@app.get("/vaccines/doses")
+@app.get(f"{NGINXConfig.uri}/vaccines/doses")
 def vaccines_doses():
     return {
         "doses": {
