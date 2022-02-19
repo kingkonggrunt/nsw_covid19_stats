@@ -55,7 +55,7 @@ class ReportedCases():
     def day(self, tag):
         _attr_row = {"class": "moh-rteTableOddRow-6"}
 
-        item = grab_table_item(tag, _attr_row, self._attr_col)
+        item = grab_table_item(tag, _attr_row, self._attr_col, None, 2)
         self._day = int(item.text.replace(",", ''))
 
     """Property: week
@@ -74,7 +74,7 @@ class ReportedCases():
     def week(self, tag):
         _attr_row = {"class": "moh-rteTableEvenRow-6"}
 
-        item = grab_table_item(tag, _attr_row, self._attr_col)
+        item = grab_table_item(tag, _attr_row, self._attr_col, None, 2)
         self._week = int(item.text.replace(",", ''))
 
     """Property: lastweek
@@ -95,7 +95,7 @@ class ReportedCases():
     def lastweek(self, tag):
         _attr_row = {"class": "moh-rteTableOddRow-6"}
 
-        item = grab_table_item(tag, _attr_row, self._attr_col, 1)
+        item = grab_table_item(tag, _attr_row, self._attr_col, 1, 2)
         self._lastweek = int(item.text.replace(",", ''))
 
     """Property: total
