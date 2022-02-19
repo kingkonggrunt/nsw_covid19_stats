@@ -4,7 +4,7 @@ An API written with the `FastAPI` framework that provides the NSW Covid Stats fo
 
 The numbers on the page are webscraped using `BeautifulSoup4` and saved to a `Redis` database. This allows the API to maintain performance and decouples the updating of information with the API.  
 
-Currently you can interact with the API @ `192.46.220.34:3400` (HTTP)
+Currently you can interact with the API @ `dcong.page/covid-stats` (HTTPS)
 
 #### Installation and Setup (Tested on Ubuntu 20.04)
 - Ensure you have a running redis database on your system on port `6379`
