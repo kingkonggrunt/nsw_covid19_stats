@@ -1,5 +1,7 @@
 # NSW COVID 19 STATS
 
+![UnitTest](https://github.com/kingkonggrunt/nsw_covid19_stats/actions/workflows/unittest.yml/badge.svg)
+
 An API written with the `FastAPI` framework that provides the NSW Covid Stats found on [NSW COVID 19 Stats Page](https://www.health.nsw.gov.au/Infectious/covid-19/Pages/stats-nsw.aspx) - Active Cases, Reported Cases, and Vaccine Numbers.
 
 The numbers on the page are webscraped using `BeautifulSoup4` and saved to a `Redis` database. This allows the API to maintain performance and decouples the updating of information with the API.  
