@@ -1,0 +1,27 @@
+name: Deployment
+on:
+  push:
+    branches: 'master'
+    paths-ignore: 
+      - '**.md'
+jobs:
+  Deploy-on-Ubuntu:
+    environment:
+      name: master
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into Server and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_NAME}}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd Development/nsw_covid19_stats
+            git pull
+            cd  
+            cd Development/Supervisor
+            venv/bin/supervisorctl restart covid_stats_api_updater
+            venv/bin/supervisorctl restart covid_stats_api
+            venv/bin/supervisorctl status
