@@ -25,32 +25,36 @@ class NGINXConfig():
 
 @app.get(f"{NGINXConfig.uri}/")
 def root():
-    return {"message": "Hello World"}
+    "List avaible routes for the end user"
+    return {
+        "Welcome": "Routes are listed below",
+        "/": "This Route",
+        "/active": {
+            " ": "no. of active, hospital, icu and ventilation cases",
+            "/cases": "no. of active cases",
+            "/hospital": "no. of hospital cases",
+            "/icu" : "no. of icu cases",
+            "/ventilation": "no. of ventilation cases"
+        },
+        "/reported": {
+            " ": "no. reported cases in for the last day, week, lastweek, and total cases",
+            "/day": "no. of reported cases in the last 24 hours",
+            "/week": "no. of reported cases in the last 7 days",
+            "/lastweek": "no. of reported cases in the last 8-14 days",
+            "/total": "no. of total reported cases"
+        },
+        "/vaccines": {
+            " ": "no. of vaccine doses and vaccine population distrubition stats",
+            "/population": "vaccine population distrubition stats",
+            "/doses": "vaccine doses stats"
+        }
+    }
 
 
-"""Active Cases
-
-Routes
-------
-/active
-    returns the active no. of `active`, `hospital`, `icu` and `ventilation`
-    cases
-
-/active/cases
-    returns the active no. of cases
-
-/active/hospital
-    returns the active no. of hospital cases
-
-/active/icu
-    returns the active no. of icu cases
-
-/active/ventilation
-    returns the active no. of ventilation cases
-
-"""
+# ===== Active Cases
 @app.get(f"{NGINXConfig.uri}/active")
 def active():
+    """returns the active no. of `active`, `hospital`, `icu` and `ventilation` cases"""
     return {
         "active": r["active"],
         "hospital": r["hospital"],
@@ -60,82 +64,64 @@ def active():
 
 @app.get(f"{NGINXConfig.uri}/active/cases")
 def active_cases():
+    """returns the active no. of cases"""
     return {"amount": r["active"]}
 
 @app.get(f"{NGINXConfig.uri}/active/hospital")
 def active_hospital():
+    """returns the active no. of hospital cases"""
     return {"amount": r["hospital"]}
 
 @app.get(f"{NGINXConfig.uri}/active/icu")
 def active_icu():
+    """returns the active no. of icu cases"""
     return {"amount": r["icu"]}
 
 @app.get(f"{NGINXConfig.uri}/active/ventilation")
 def active_ventilation():
+    """returns the active no. of ventilation cases"""
     return {"amount": r["ventilation"]}
 
 
-"""Reported Cases
 
-Routes
-------
-/reported
-    returns the reported no. of cases for the last `day`, `week`, `lastweek`,
-    and `total` cases
+# ===== Reported
 
-/reported/day
-    returns the reported no. of cases for the past 24 hours (day)
-
-/reported/week
-    returns the reported no. of cases for the past 7 days
-
-/reported/lastweek
-    returns the reported no. of cases for the past 8-14 days
-
-/reported/total
-    returns the total reported no. of cases
-"""
 @app.get(f"{NGINXConfig.uri}/reported")
 def reported():
+    """returns the reported no. of cases for the last `day`, `week`, `lastweek`, and `total` cases"""
     return {
         "day": r["reported_day"],
         "week": r["reported_week"],
         "lastweek": r["reported_lastweek"],
         "total": r["reported_total"],
     }
-
 @app.get(f"{NGINXConfig.uri}/reported/day")
 def reported_day():
+    """returns the reported no. of cases for the past 24 hours (day)"""
     return {"amount": r["reported_day"]}
 
 @app.get(f"{NGINXConfig.uri}/reported/week")
 def reported_week():
+    """returns the reported no. of cases for the past 7 days"""
     return {"amount": r["reported_week"]}
 
 @app.get(f"{NGINXConfig.uri}/reported/lastweek")
 def reported_lastweek():
+    """returns the reported no. of cases for the past 8-14 days"""
     return {"amount": r["reported_lastweek"]}
 
 @app.get(f"{NGINXConfig.uri}/reported/total")
 def reported_total():
+    """returns the total reported no. of cases"""
     return {"amount": r["reported_total"]}
 
 
-"""Vaccines
 
-Routes
-------
-/vaccines
-    return both the vaccine doses and vaccine population distrubition stats
+# ===== Vaccines
 
-/vaccines/population
-    return the vaccine population distrubition stats
-
-/vaccines/doses
-    return the vaccine doses stats
-"""
 @app.get(f"{NGINXConfig.uri}/vaccines")
 def vaccines():
+    """return both the vaccine doses and vaccine population distrubition stats"""
     return {
         "doses": {
             "daily": {
@@ -176,6 +162,7 @@ def vaccines():
 
 @app.get(f"{NGINXConfig.uri}/vaccines/population")
 def vaccines_population():
+    "return the vaccine population distrubition stats"
     return {
         "population": {
             "16_above": {
@@ -198,6 +185,7 @@ def vaccines_population():
 
 @app.get(f"{NGINXConfig.uri}/vaccines/doses")
 def vaccines_doses():
+    """return the vaccine doses stats"""
     return {
         "doses": {
             "daily": {
