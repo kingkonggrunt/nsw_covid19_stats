@@ -5,7 +5,7 @@
 
 import time
 import redis
-from src.redis.redis import RedisDictionary
+from src.redishelper.redishelper import RedisDictionary
 from src.saucier.soup import Soup
 from src.updater.updater import RedisUpdater
 
