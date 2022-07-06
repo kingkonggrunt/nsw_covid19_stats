@@ -123,23 +123,6 @@ def reported_total():
 def vaccines():
     """return both the vaccine doses and vaccine population distrubition stats"""
     return {
-        "doses": {
-            "daily": {
-                "first": r["daily_nsw_first"],
-                "second": r["daily_nsw_second"],
-                "third": r["daily_nsw_third"],
-                "total": r["daily_nsw_total"],
-            },
-            "all": {
-                "first": r["total_nsw_first"],
-                "second": r["total_nsw_second"],
-                "third": r["total_nsw_third"],
-                "all": r["total_nsw_total"],
-                "nsw": r["total_nsw"],
-                "other": r["total_other"],
-                "total": r["total"],
-            }
-        },
         "population": {
             "16_above": {
                 "first": r["first_16_above"],
@@ -180,28 +163,5 @@ def vaccines_population():
                 "second": r["second_5_to_11"],
                 "third": r["third_5_to_11"],
             },
-        }
-    }
-
-@app.get(f"{NGINXConfig.uri}/vaccines/doses")
-def vaccines_doses():
-    """return the vaccine doses stats"""
-    return {
-        "doses": {
-            "daily": {
-                "first": r["daily_nsw_first"],
-                "second": r["daily_nsw_second"],
-                "third": r["daily_nsw_third"],
-                "total": r["daily_nsw_total"],
-            },
-            "all": {
-                "first": r["total_nsw_first"],
-                "second": r["total_nsw_second"],
-                "third": r["total_nsw_third"],
-                "all": r["total_nsw_total"],
-                "nsw": r["total_nsw"],
-                "other": r["total_other"],
-                "total": r["total"],
-            }
         }
     }
