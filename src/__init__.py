@@ -1,4 +1,4 @@
 from . import saucier
-from . import redis
+from . import redishelper
 from . import updater
 from . import webcontent
