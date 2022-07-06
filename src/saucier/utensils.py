@@ -25,7 +25,7 @@ def return_li_item_with_text_search(tag, text):
 
 def grab_table_item(tag, row_attr, col_attr, row_index=None, col_index=None):
     """Returns a <td> item from a table using a row and column attribute search -
-    and index search if multiple rows or columns are found
+    and index search (0 starting) if multiple rows or columns are found
 
     Parameters
     ----------
@@ -36,7 +36,7 @@ def grab_table_item(tag, row_attr, col_attr, row_index=None, col_index=None):
     col_attr : dict
         Attributes for the desired column
     row_index : int
-        (Optional) Index of desired row - if multiple rows are found
+        (Optional) Index of desired row - if multiple rows are found. 
     col_index : int
         (Optional) Index of desired column - if multiple rows are found.
 
