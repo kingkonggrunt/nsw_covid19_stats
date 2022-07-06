@@ -3,7 +3,7 @@
 
 """
 import redis
-from ..redis.redis import RedisDictionary
+from ..redishelper.redishelper import RedisDictionary
 from ..saucier.soup import Soup
 from ..webcontent import active, reported, vaccines
 
