@@ -1,5 +1,5 @@
 from ..saucier.soup import Soup
-from ..saucier.utensils import *  #i know what i'm doing here
+from ..saucier.utensils import grab_table_item
 
 class ReportedCases():
     """Reported Covid Cases in NSW
@@ -39,84 +39,58 @@ class ReportedCases():
         self.lastweek = self._tag
         self.total = self._tag
 
-    """Property: day
-        no. of reported cases in the past 24 hours
-
-    Variables
-    ---------
-    _attr_row: dict
-        attributes for the `day` row
-    """
     @property
     def day(self):
+        """Total amount of cases in the past 24 hours."""
         return self._day
 
     @day.setter
     def day(self, tag):
-        _attr_row = {"class": "moh-rteTableOddRow-6"}
+        """Total amount of cases in the past 24 hours."""
+        row_class = "moh-rteTableOddRow-6"
+        col_class = "moh-rteTableOddCol-6"
 
-        item = grab_table_item(tag, _attr_row, self._attr_col, None, 2)
+        item = grab_table_item(tag, {"class": row_class}, {"class": col_class}, 0, 2)
         self._day = int(item.text.replace(",", ''))
 
-    """Property: week
-        no. of reported cases in the past week
-
-    Variables
-    ---------
-    _attr_row: dict
-        attributes for the `week` row
-    """
     @property
     def week(self):
+        """Total amount of cases in the past week"""
         return self._week
 
     @week.setter
     def week(self, tag):
-        _attr_row = {"class": "moh-rteTableEvenRow-6"}
+        """Total amount of cases in the past week"""
+        row_class = "moh-rteTableEvenRow-6"
+        col_class = "moh-rteTableOddCol-6"
 
-        item = grab_table_item(tag, _attr_row, self._attr_col, None, 2)
+        item = grab_table_item(tag, {"class": row_class}, {"class": col_class}, 0, 2)
         self._week = int(item.text.replace(",", ''))
 
-    """Property: lastweek
-        no. of cases
-    Variables
-    ---------
-    _attr_row: dict
-        no. of cases in the past week before last (14-8 days ago)
-
-    Unlike property `week`, `lastweek` is found using a list search
-
-    """
     @property
     def lastweek(self):
+        """Total amount of cases in the week before last week"""
         return self._lastweek
 
     @lastweek.setter
     def lastweek(self, tag):
-        _attr_row = {"class": "moh-rteTableOddRow-6"}
+        """Total amount of cases in the week before last week"""
+        row_class = "moh-rteTableOddRow-6"
+        col_class = "moh-rteTableOddCol-6"
 
-        item = grab_table_item(tag, _attr_row, self._attr_col, 1, 2)
+        item = grab_table_item(tag, {"class": row_class}, {"class": col_class}, 1, 2)
         self._lastweek = int(item.text.replace(",", ''))
 
-    """Property: total
-        no. of cases total
-
-    Variables
-    ---------
-    _attr_row: dict
-        attributes for the `total` row (footer)
-    _attr_col: dict
-        attributes for the `total` value
-
-    """
     @property
     def total(self):
+        """Total amount of covid cases"""
         return self._total
 
     @total.setter
     def total(self, tag):
-        _attr_row = {"class": "moh-rteTableFooterRow-6"}
-        _attr_col = {"class": "moh-rteTableFooterOddCol-6"}
+        """Finds the total amount of covid cases since the beginning of the pandemic"""
+        row_class = "moh-rteTableEvenRow-6"
+        col_class = "moh-rteTableEvenCol-6"
 
-        item = grab_table_item(tag, _attr_row, _attr_col)
+        item = grab_table_item(tag, {"class": row_class}, {"class": col_class}, 1, 3)
         self._total = int(item.text.replace(",", ''))
