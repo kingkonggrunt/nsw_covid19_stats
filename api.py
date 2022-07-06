@@ -10,7 +10,7 @@ TODO: **kwargs for redisdictionary
 from fastapi import FastAPI
 
 import redis
-from src.redis.redis import RedisDictionary
+from src.redishelper.redishelper import RedisDictionary
 
 
 app = FastAPI()
@@ -44,9 +44,8 @@ def root():
             "/total": "no. of total reported cases"
         },
         "/vaccines": {
-            " ": "no. of vaccine doses and vaccine population distrubition stats",
-            "/population": "vaccine population distrubition stats",
-            "/doses": "vaccine doses stats"
+            " ": "vaccine population distrubition stats",
+            "/population": "vaccine population distrubition stats"
         }
     }
 
