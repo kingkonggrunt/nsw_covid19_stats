@@ -52,21 +52,9 @@ class RedisUpdater():  #TODO: ? better name (too misleading)
 
     def _update_vaccines(self):
         """Updates the Vaccine stats"""
-        _vaccines = vaccines.VaccineDoses(self.soup)
         _vaccines_percent = vaccines.VaccineDosesPercent(self.soup)
 
         self.rdict.multi_set({
-            "daily_nsw_first": _vaccines.first_day,
-            "daily_nsw_second": _vaccines.second_day,
-            "daily_nsw_third": _vaccines.third_day,
-            "daily_nsw_total": _vaccines.total_day,
-            "total_nsw_first": _vaccines.first_total,
-            "total_nsw_second": _vaccines.second_total,
-            "total_nsw_third": _vaccines.third_total,
-            "total_nsw_total": _vaccines.total_total,
-            "total_nsw": _vaccines.total_total,
-            "total_other": _vaccines.total_total_other,
-            "total": _vaccines.total_doses,
             "first_16_above": _vaccines_percent.first_16_above,
             "first_5_to_11": _vaccines_percent.first_5_to_11,
             "first_12_to_15": _vaccines_percent.first_12_to_15,
